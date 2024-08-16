@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'message', 'as' => 'message.'], function () {
+    Route::get('/', [MessageController::class, 'index'])->name('index');
+    Route::post('/send', [MessageController::class, 'store'])->name('store');
+});
+
